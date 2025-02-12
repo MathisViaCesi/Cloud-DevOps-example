@@ -1,0 +1,14 @@
+{
+  "builders": [{
+    "type": "googlecompute",
+    "project_id": "{{user `project_id`}}",
+    "source_image_family": "debian-11",
+    "image_name": "app-image-{{timestamp}}",
+    "image_family": "app-image",
+    "zone": "europe-west9-a"
+  }],
+  "provisioners": [{
+    "type": "ansible",
+    "playbook_file": "./playbook.yaml"
+  }]
+}
