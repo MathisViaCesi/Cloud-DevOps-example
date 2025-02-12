@@ -1,1 +1,37 @@
-dmerdetoipourlaconf
+steps:
+  - id: init
+    name: "golang:1.23"
+    args:
+      - go
+      - mod
+      - tidy
+    dir: src/
+  - id: vet
+    name: "golang:1.23"
+    args:
+      - go
+      - vet
+    dir: src/
+  - id: vuln-checking
+    name: "golang:1.23"
+    args:
+      - go
+      - run
+      - golang.org/x/vuln/cmd/govulncheck@latest
+      - ./...
+    dir: src/
+  - id: push
+    name: gcr.io/cloud-builders/gcloud
+    args:
+      - artifacts
+      - go
+      - upload
+      - --project=prj-cloud-devops-ops
+      - --repository=registry-cloud-devops-go
+      - --location=europe-west9
+      - --module-path=q-sw.xyz/web
+      - --version=v1.0.0
+    dir: src/
+
+options:
+  logging: CLOUD_LOGGING_ONLY
