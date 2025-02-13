@@ -1,3 +1,6 @@
+MEURIOT VARIN Mathis
+FRERE Julie
+
 # Go Simple Web application
 
 > Cette application ecrit en Go est une simple application web.
